@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Максим Калинин](https://up.htmlacademy.ru/javascript/22/user/120631).
-* Наставник: `Неизвестно`.
+* Студент: [Максим Калинин](https://htmlacademy.ru/profile/id120631).
+* Наставник: [Евгений Лепёшкин](https://htmlacademy.ru/profile/id144641).
 
 ---
 
