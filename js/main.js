@@ -1,14 +1,14 @@
-const getRandomInt = (min, max) => {
-  if (max < min) [min, max] = [max, min];
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const getRandomFloat = (min, max, afterComma) => {
-  if (max < min) [min, max] = [max, min];
+const getRandomNumber = (min, max, afterComma = 0) => {
+  if (min < 0 || max < 0) {
+    return -1;
+  }
+  if (min > max) {
+    [min, max] = [max, min];
+  }
+  if (afterComma === 0) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
   return Number.parseFloat((Math.random() * (max - min) + min).toFixed(afterComma));
 }
 
-getRandomInt(0, 5);
-getRandomFloat(0, 5, 3);
+getRandomNumber(1, 2, 3);
