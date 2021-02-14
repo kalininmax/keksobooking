@@ -47,3 +47,5 @@ const createOfferList = (offersCount) => {
 }
 
 const offerList = createOfferList(OFFERS_COUNT);
+
+export { offerList };
