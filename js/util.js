@@ -1,3 +1,5 @@
+const OFFER_PHOTO = { width: 45, height: 40 };
+
 const getRandomNumber = (min, max, afterComma = 0) => {
   if (min < 0 || max < 0) {
     return -1;
@@ -31,4 +33,26 @@ const getRandomLocation = ({ x, y }) => {
   return { x: getRandomNumber(x.min, x.max, 5), y: getRandomNumber(y.min, y.max, 5) };
 }
 
-export { getRandomNumber, getRandomArrayElement, getRandomArrayElements, getRandomLocation }
+const translateToRussian = (englishWord) => {
+  switch (englishWord) {
+    case 'flat':
+      return 'Квартира';
+    case 'bungalow':
+      return 'Бунгало';
+    case 'house':
+      return 'Дом';
+    case 'palace':
+      return 'Дворец';
+
+    default:
+      break;
+  }
+}
+
+export {
+  getRandomNumber,
+  getRandomArrayElement,
+  getRandomArrayElements,
+  getRandomLocation,
+  translateToRussian
+}
