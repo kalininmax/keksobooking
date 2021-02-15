@@ -37,7 +37,7 @@ const createRandomOffer = () => {
   }
 }
 
-const createOfferList = (offersCount) => {
+const createOffers = (offersCount) => {
   const array = [];
   while (offersCount > 0) {
     array.push(createRandomOffer());
@@ -46,6 +46,6 @@ const createOfferList = (offersCount) => {
   return array;
 }
 
-const offerList = createOfferList(OFFERS_COUNT);
+const offerList = createOffers(OFFERS_COUNT);
 
-export { offerList };
+export { offerList, createRandomOffer };
