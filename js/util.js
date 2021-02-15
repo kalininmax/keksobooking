@@ -49,10 +49,39 @@ const translateToRussian = (englishWord) => {
   }
 }
 
+
+const createOfferPhotos = (photos) => {
+  const photosListFragment = document.createDocumentFragment();
+  photos.forEach((photo) => {
+    const cardPhoto = document.createElement('img');
+    cardPhoto.classList.add('popup__photo');
+    cardPhoto.src = photo;
+    cardPhoto.width = OFFER_PHOTO.width;
+    cardPhoto.height = OFFER_PHOTO.height;
+    cardPhoto.alt = 'Фотография жилья';
+    photosListFragment.appendChild(cardPhoto);
+  });
+  return photosListFragment;
+}
+
+const createOfferFeatures = (features) => {
+  const featuresItemsFragment = document.createDocumentFragment();
+  features.forEach((feature) => {
+    const featureItem = document.createElement('li');
+    featureItem.classList.add('popup__feature');
+    featureItem.classList.add(`popup__feature--${feature}`);
+    featuresItemsFragment.appendChild(featureItem);
+  });
+  return featuresItemsFragment;
+}
+
+
 export {
   getRandomNumber,
   getRandomArrayElement,
   getRandomArrayElements,
   getRandomLocation,
-  translateToRussian
+  translateToRussian,
+  createOfferPhotos,
+  createOfferFeatures
 }
