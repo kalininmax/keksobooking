@@ -21,7 +21,7 @@ const createRandomOffer = () => {
       avatar: `img/avatars/user0${getRandomNumber(1, TOTAL_USERS)}.png`,
     },
     offer: {
-      title: 'Заголовок',
+      title: `Заголовок ${getRandomNumber(1, OFFERS_COUNT)}`,
       address: `${location.x}, ${location.y} `,
       price: getRandomNumber(PRICE.min, PRICE.max),
       type: getRandomArrayElement(TYPE),
@@ -30,7 +30,7 @@ const createRandomOffer = () => {
       checkin: getRandomArrayElement(CHECKIN_TIME),
       checkout: getRandomArrayElement(CHECKIN_TIME),
       features: getRandomArrayElements(FEATURES),
-      description: 'Описание',
+      description: `Описание ${getRandomNumber(1, OFFERS_COUNT)}`,
       photos: getRandomArrayElements(PHOTOS),
     },
     location: location,
