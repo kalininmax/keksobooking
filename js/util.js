@@ -33,23 +33,6 @@ const getRandomLocation = ({ x, y }) => {
   return { x: getRandomNumber(x.min, x.max, 5), y: getRandomNumber(y.min, y.max, 5) };
 }
 
-const translateToRussian = (englishWord) => {
-  switch (englishWord) {
-    case 'flat':
-      return 'Квартира';
-    case 'bungalow':
-      return 'Бунгало';
-    case 'house':
-      return 'Дом';
-    case 'palace':
-      return 'Дворец';
-
-    default:
-      break;
-  }
-}
-
-
 const createOfferPhotos = (photos) => {
   const photosListFragment = document.createDocumentFragment();
   photos.forEach((photo) => {
@@ -75,13 +58,11 @@ const createOfferFeatures = (features) => {
   return featuresItemsFragment;
 }
 
-
 export {
   getRandomNumber,
   getRandomArrayElement,
   getRandomArrayElements,
   getRandomLocation,
-  translateToRussian,
   createOfferPhotos,
   createOfferFeatures
 }
