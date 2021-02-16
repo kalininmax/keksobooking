@@ -4,6 +4,7 @@ const TOTAL_USERS = 8;
 const OFFERS_COUNT = 10;
 const PRICE = { min: 10, max: 10000 };
 const TYPE = ['palace', 'flat', 'house', 'bungalow'];
+const TYPES = { flat: { ru: 'Квартира' }, bungalow: { ru: 'Бунгало' }, house: { ru: 'Дом' }, palace: { ru: 'Дворец' } }
 const ROOMS = { min: 1, max: 50 };
 const GUESTS = { min: 1, max: 50 };
 const CHECKIN_TIME = ['12:00', '13:00', '14:00'];
@@ -21,7 +22,7 @@ const createRandomOffer = () => {
       avatar: `img/avatars/user0${getRandomNumber(1, TOTAL_USERS)}.png`,
     },
     offer: {
-      title: 'Заголовок',
+      title: `Заголовок ${getRandomNumber(1, OFFERS_COUNT)}`,
       address: `${location.x}, ${location.y} `,
       price: getRandomNumber(PRICE.min, PRICE.max),
       type: getRandomArrayElement(TYPE),
@@ -30,14 +31,14 @@ const createRandomOffer = () => {
       checkin: getRandomArrayElement(CHECKIN_TIME),
       checkout: getRandomArrayElement(CHECKIN_TIME),
       features: getRandomArrayElements(FEATURES),
-      description: 'Описание',
+      description: `Описание ${getRandomNumber(1, OFFERS_COUNT)}`,
       photos: getRandomArrayElements(PHOTOS),
     },
     location: location,
   }
 }
 
-const createOfferList = (offersCount) => {
+const createOffers = (offersCount) => {
   const array = [];
   while (offersCount > 0) {
     array.push(createRandomOffer());
@@ -46,6 +47,6 @@ const createOfferList = (offersCount) => {
   return array;
 }
 
-const offerList = createOfferList(OFFERS_COUNT);
+const offerList = createOffers(OFFERS_COUNT);
 
-export { offerList };
+export { offerList, createRandomOffer, TYPES };
