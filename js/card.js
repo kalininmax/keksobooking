@@ -1,5 +1,5 @@
-import { createRandomOffer } from './data.js';
-import { translateToRussian, createOfferPhotos, createOfferFeatures } from './util.js';
+import { createRandomOffer, TYPES } from './data.js';
+import { createOfferPhotos, createOfferFeatures } from './util.js';
 
 const mapCanvas = document.querySelector('#map-canvas');
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -11,7 +11,7 @@ const createCard = ({ author: { avatar }, offer: { title, address, price, type, 
   card.querySelector('.popup__title').textContent = title;
   card.querySelector('.popup__text--address').textContent = address;
   card.querySelector('.popup__text--price').textContent = `${price} ₽/ночь`;
-  card.querySelector('.popup__type').textContent = translateToRussian(type);
+  card.querySelector('.popup__type').textContent = TYPES[type].ru;
   card.querySelector('.popup__text--capacity').textContent = `${rooms} комнаты для ${guests} гостей`;
   card.querySelector('.popup__text--time').textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
   card.querySelector('.popup__features').innerHTML = '';
