@@ -4,6 +4,7 @@ const TOTAL_USERS = 8;
 const OFFERS_COUNT = 10;
 const PRICE = { min: 10, max: 10000 };
 const TYPE = ['palace', 'flat', 'house', 'bungalow'];
+const TYPES = { flat: { ru: 'Квартира' }, bungalow: { ru: 'Бунгало' }, house: { ru: 'Дом' }, palace: { ru: 'Дворец' } }
 const ROOMS = { min: 1, max: 50 };
 const GUESTS = { min: 1, max: 50 };
 const CHECKIN_TIME = ['12:00', '13:00', '14:00'];
@@ -48,4 +49,4 @@ const createOffers = (offersCount) => {
 
 const offerList = createOffers(OFFERS_COUNT);
 
-export { offerList, createRandomOffer };
+export { offerList, createRandomOffer, TYPES };
