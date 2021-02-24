@@ -14,6 +14,7 @@ const LOCATIONS = {
   x: { min: 35.65000, max: 35.70000 },
   y: { min: 139.70000, max: 139.80000 },
 };
+const TOKYO = { lat: 35.652832, lng: 139.839478 };
 
 const createRandomOffer = () => {
   const location = getRandomLocation(LOCATIONS);
@@ -49,4 +50,4 @@ const createOffers = (offersCount) => {
 
 const offerList = createOffers(OFFERS_COUNT);
 
-export { offerList, createRandomOffer, TYPES };
+export { offerList, createRandomOffer, TYPES, TOKYO };
