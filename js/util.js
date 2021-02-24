@@ -58,11 +58,16 @@ const createOfferFeatures = (features) => {
   return featuresItemsFragment;
 }
 
+const getAddress = ({ lat, lng }) => {
+  return `${lat.toFixed(5)}, ${lng.toFixed(5)}`
+}
+
 export {
   getRandomNumber,
   getRandomArrayElement,
   getRandomArrayElements,
   getRandomLocation,
   createOfferPhotos,
-  createOfferFeatures
+  createOfferFeatures,
+  getAddress
 }
