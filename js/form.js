@@ -6,6 +6,7 @@ const typeSelect = adForm.querySelector('#type');
 const priceInput = adForm.querySelector('#price');
 const timeInSelect = adForm.querySelector('#timein');
 const timeOutSelect = adForm.querySelector('#timeout');
+const addressInput = adForm.querySelector('#address');
 const filterForm = document.querySelector('.map__filters');
 
 typeSelect.addEventListener('change', () => {
@@ -35,5 +36,6 @@ const disableFilterForm = () => {
   }
 };
 
-disableAdForm();
-disableFilterForm();
+addressInput.setAttribute('readonly', 'readonly');
+
+export { disableAdForm, disableFilterForm, addressInput };
