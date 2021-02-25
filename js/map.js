@@ -2,6 +2,7 @@
 import { TOKYO, offerList } from './data.js';
 import { addressInput } from './form.js';
 import { getAddress } from './util.js';
+import { createCard } from './card.js';
 
 const map = L.map('map-canvas')
   .setView({
@@ -26,6 +27,7 @@ const pinIcon = L.icon({
   iconUrl: '../img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
+  popupAnchor: [0, -10],
 });
 
 const marker = L.marker(
@@ -46,14 +48,15 @@ marker.on('moveend', (evt) => {
   addressInput.value = getAddress(evt.target.getLatLng());
 });
 
-offerList.forEach(({ location: { x: lat, y: lng } }) => {
+offerList.forEach(offer => {
   L.marker(
     {
-      lat,
-      lng,
+      lat: offer.location.x,
+      lng: offer.location.y,
     },
     {
       icon: pinIcon,
     },
-  ).addTo(map);
-})
+  ).addTo(map)
+    .bindPopup(createCard(offer));
+});
