@@ -3,7 +3,6 @@ import { createOfferPhotos, createOfferFeatures } from './util.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-
 const createCard = ({ author: { avatar }, offer: { title, address, price, type, rooms, guests, checkin, checkout, features, description, photos } }) => {
   const card = cardTemplate.cloneNode(true);
   const avatarImg = card.querySelector('.popup__avatar');
