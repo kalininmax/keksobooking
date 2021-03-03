@@ -8,6 +8,7 @@ const timeInSelect = adForm.querySelector('#timein');
 const timeOutSelect = adForm.querySelector('#timeout');
 const addressInput = adForm.querySelector('#address');
 const capacitySelect = adForm.querySelector('#capacity');
+const capacityOptions = capacitySelect.querySelectorAll('option');
 const roomNumberSelect = adForm.querySelector('#room_number');
 const filterForm = document.querySelector('.map__filters');
 
@@ -41,7 +42,6 @@ const disableFilterForm = () => {
 addressInput.setAttribute('readonly', 'readonly');
 
 const roomCapacityHandler = () => {
-  const capacityOptions = capacitySelect.querySelectorAll('option');
 
   roomNumberSelect.addEventListener('change', (evt) => {
     switch (evt.target.value) {
@@ -51,7 +51,6 @@ const roomCapacityHandler = () => {
             option.hidden = 'true';
           } else {
             option.removeAttribute('hidden');
-            capacitySelect.value = option.value;
           }
         });
         break;
@@ -61,7 +60,6 @@ const roomCapacityHandler = () => {
             option.hidden = 'true';
           } else {
             option.removeAttribute('hidden');
-            capacitySelect.value = option.value;
           }
         });
         break;
@@ -72,7 +70,6 @@ const roomCapacityHandler = () => {
             option.hidden = 'true';
           } else {
             option.removeAttribute('hidden');
-            capacitySelect.value = option.value;
           }
         });
         break;
@@ -83,7 +80,6 @@ const roomCapacityHandler = () => {
             option.hidden = 'true';
           } else {
             option.removeAttribute('hidden');
-            capacitySelect.value = option.value;
           }
         });
         break;
@@ -91,6 +87,7 @@ const roomCapacityHandler = () => {
       default:
         break;
     }
+    capacitySelect.value = '';
   });
 }
 
