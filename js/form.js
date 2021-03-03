@@ -51,6 +51,7 @@ const roomCapacityHandler = () => {
             option.hidden = 'true';
           } else {
             option.removeAttribute('hidden');
+            capacitySelect.value = option.value;
           }
         });
         break;
@@ -60,6 +61,7 @@ const roomCapacityHandler = () => {
             option.hidden = 'true';
           } else {
             option.removeAttribute('hidden');
+            capacitySelect.value = option.value;
           }
         });
         break;
@@ -70,6 +72,7 @@ const roomCapacityHandler = () => {
             option.hidden = 'true';
           } else {
             option.removeAttribute('hidden');
+            capacitySelect.value = option.value;
           }
         });
         break;
@@ -80,6 +83,7 @@ const roomCapacityHandler = () => {
             option.hidden = 'true';
           } else {
             option.removeAttribute('hidden');
+            capacitySelect.value = option.value;
           }
         });
         break;
