@@ -1,5 +1,11 @@
 import { TYPES } from './data.js';
 
+const roomsCapacity = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
 const adForm = document.querySelector('.ad-form');
 const adFormFieldsets = adForm.querySelectorAll('fieldset');
 const typeSelect = adForm.querySelector('#type');
@@ -9,7 +15,7 @@ const timeOutSelect = adForm.querySelector('#timeout');
 const addressInput = adForm.querySelector('#address');
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
-const roomNumberSelect = adForm.querySelector('#room_number');
+const roomSelect = adForm.querySelector('#room_number');
 const filterForm = document.querySelector('.map__filters');
 
 typeSelect.addEventListener('change', () => {
@@ -41,56 +47,15 @@ const disableFilterForm = () => {
 
 addressInput.setAttribute('readonly', 'readonly');
 
-const roomCapacityHandler = () => {
-
-  roomNumberSelect.addEventListener('change', (evt) => {
-    switch (evt.target.value) {
-      case '1':
-        capacityOptions.forEach(option => {
-          if (option.value !== '1') {
-            option.hidden = 'true';
-          } else {
-            option.removeAttribute('hidden');
-          }
-        });
-        break;
-      case '2':
-        capacityOptions.forEach(option => {
-          if ((option.value !== '1') && (option.value !== '2')) {
-            option.hidden = 'true';
-          } else {
-            option.removeAttribute('hidden');
-          }
-        });
-        break;
-
-      case '3':
-        capacityOptions.forEach(option => {
-          if ((option.value !== '1') && (option.value !== '2') && (option.value !== '3')) {
-            option.hidden = 'true';
-          } else {
-            option.removeAttribute('hidden');
-          }
-        });
-        break;
-
-      case '100':
-        capacityOptions.forEach(option => {
-          if (option.value !== '0') {
-            option.hidden = 'true';
-          } else {
-            option.removeAttribute('hidden');
-          }
-        });
-        break;
-
-      default:
-        break;
-    }
-    capacitySelect.value = '';
+const validateRoomSelect = () => {
+  capacityOptions.forEach((option) => {
+    option.selected = roomsCapacity[roomSelect.value][0] === option.value; // выбирает первую доступную опцию
+    // indexOf ищет в массиве опцию, если такой опции нет — возвращает -1, сравнивает с 0, возвращает true
+    option.disabled = roomsCapacity[roomSelect.value].indexOf(option.value) < 0;
+    option.hidden = option.disabled;
   });
-}
+};
 
-roomCapacityHandler();
+roomSelect.addEventListener('change', validateRoomSelect);
 
 export { disableAdForm, disableFilterForm, addressInput };
