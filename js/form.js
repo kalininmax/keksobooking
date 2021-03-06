@@ -56,6 +56,8 @@ const validateRoomSelect = () => {
   });
 };
 
+validateRoomSelect();
+
 roomSelect.addEventListener('change', validateRoomSelect);
 
 export { disableAdForm, disableFilterForm, addressInput };
