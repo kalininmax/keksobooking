@@ -1,8 +1,14 @@
 /* global L:readonly */
-import { TOKYO, offerList } from './data.js';
 import { addressInput } from './form.js';
 import { getAddress } from './util.js';
 import { createCard } from './card.js';
+import { getOffersData } from './data.js';
+
+const TOKYO = { lat: 35.652832, lng: 139.839478 };
+
+const offersList = getOffersData((offers) => {
+  return offers;
+})
 
 const map = L.map('map-canvas')
   .setView({
@@ -48,7 +54,7 @@ marker.on('moveend', (evt) => {
   addressInput.value = getAddress(evt.target.getLatLng());
 });
 
-offerList.forEach(offer => {
+offersList.forEach(offer => {
   L.marker(
     {
       lat: offer.location.x,
