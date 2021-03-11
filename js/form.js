@@ -1,4 +1,4 @@
-import { TYPES } from './data.js';
+import { TYPES } from './card.js';
 
 const roomsCapacity = {
   1: ['1'],
@@ -6,6 +6,7 @@ const roomsCapacity = {
   3: ['1', '2', '3'],
   100: ['0'],
 };
+
 const adForm = document.querySelector('.ad-form');
 const adFormFieldsets = adForm.querySelectorAll('fieldset');
 const typeSelect = adForm.querySelector('#type');
@@ -49,8 +50,7 @@ addressInput.setAttribute('readonly', 'readonly');
 
 const validateRoomSelect = () => {
   capacityOptions.forEach((option) => {
-    option.selected = roomsCapacity[roomSelect.value][0] === option.value; // выбирает первую доступную опцию
-    // indexOf ищет в массиве опцию, если такой опции нет — возвращает -1, сравнивает с 0, возвращает true
+    option.selected = roomsCapacity[roomSelect.value][0] === option.value;
     option.disabled = roomsCapacity[roomSelect.value].indexOf(option.value) < 0;
     option.hidden = option.disabled;
   });
