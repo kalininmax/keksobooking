@@ -45,11 +45,15 @@ const marker = L.marker(
   },
 ).addTo(map);
 
-addressInput.value = getAddress(marker.getLatLng());
 
 marker.on('moveend', (evt) => {
   addressInput.value = getAddress(evt.target.getLatLng());
 });
+
+const resetAddress = () => {
+  marker.setLatLng(TOKYO);
+  addressInput.value = getAddress(marker.getLatLng());
+}
 
 const renderOffers = (offers) => {
   offers.forEach(offer => {
@@ -71,3 +75,5 @@ getData(
     renderOffers(offers.slice(0, OFFERS_COUNT));
   },
   showErrorMessage);
+
+export { resetAddress };
