@@ -1,6 +1,7 @@
 import { TYPES } from './card.js';
 import { sendData } from './data.js';
 import { showSuccessMessage, showErrorMessage } from './util.js';
+import { resetAddress } from './map.js';
 
 const roomsCapacity = {
   1: ['1'],
@@ -74,6 +75,16 @@ const onSubmitAdForm = (onSuccess, onFail) => {
   });
 };
 
-onSubmitAdForm(showSuccessMessage, showErrorMessage);
+const resetAdForm = () => {
+  adForm.reset();
+  resetAddress();
+};
+
+resetAdForm();
+
+onSubmitAdForm(() => {
+  showSuccessMessage();
+  resetAdForm();
+}, showErrorMessage);
 
 export { disableAdForm, disableFilterForm, addressInput };
