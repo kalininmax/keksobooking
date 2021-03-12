@@ -18,6 +18,7 @@ const timeInSelect = adForm.querySelector('#timein');
 const timeOutSelect = adForm.querySelector('#timeout');
 const addressInput = adForm.querySelector('#address');
 const capacitySelect = adForm.querySelector('#capacity');
+const resetButton = adForm.querySelector('.ad-form__reset');
 const capacityOptions = capacitySelect.querySelectorAll('option');
 const roomSelect = adForm.querySelector('#room_number');
 const filterForm = document.querySelector('.map__filters');
@@ -81,6 +82,11 @@ const resetAdForm = () => {
 };
 
 resetAdForm();
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetAdForm();
+})
 
 onSubmitAdForm(() => {
   showSuccessMessage();
