@@ -1,4 +1,4 @@
-const getOffersData = (onSuccess) => {
+const getData = (onSuccess) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
     .then((offers) => {
@@ -9,4 +9,4 @@ const getOffersData = (onSuccess) => {
     });
 };
 
-export { getOffersData };
+export { getData };
