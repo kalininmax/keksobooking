@@ -5,6 +5,7 @@ import { createCard } from './card.js';
 import { getData } from './data.js';
 
 const TOKYO = { lat: 35.652832, lng: 139.839478 };
+const OFFERS_COUNT = 10;
 
 const map = L.map('map-canvas')
   .setView({
@@ -54,8 +55,8 @@ const renderOffers = (offers) => {
   offers.forEach(offer => {
     L.marker(
       {
-        lat: offer.location.x,
-        lng: offer.location.y,
+        lat: offer.location.lat,
+        lng: offer.location.lng,
       },
       {
         icon: pinIcon,
@@ -66,5 +67,5 @@ const renderOffers = (offers) => {
 }
 
 getData((offers) => {
-  renderOffers(offers);
-})
+  renderOffers(offers.slice(0, OFFERS_COUNT));
+});
