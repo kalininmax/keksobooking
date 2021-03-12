@@ -62,6 +62,10 @@ const getAddress = ({ lat, lng }) => {
   return `${lat.toFixed(5)}, ${lng.toFixed(5)}`
 }
 
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+};
+
 export {
   getRandomNumber,
   getRandomArrayElement,
@@ -69,5 +73,6 @@ export {
   getRandomLocation,
   createOfferPhotos,
   createOfferFeatures,
-  getAddress
+  getAddress,
+  isEscEvent
 }
