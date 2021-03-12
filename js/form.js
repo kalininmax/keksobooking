@@ -1,4 +1,6 @@
 import { TYPES } from './card.js';
+import { sendData } from './data.js';
+import { isEscEvent } from './util.js';
 
 const roomsCapacity = {
   1: ['1'],
@@ -59,5 +61,54 @@ const validateRoomSelect = () => {
 validateRoomSelect();
 
 roomSelect.addEventListener('change', validateRoomSelect);
+
+const closePopup = () => {
+  if (document.querySelector('.success')) {
+    document.querySelector('.success').remove();
+  }
+  if (document.querySelector('.error')) {
+    document.querySelector('.error').remove();
+  }
+  document.removeEventListener('keydown', onPopupEscKeydown);
+}
+
+const onPopupEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closePopup();
+  }
+}
+
+const showSuccessMessage = () => {
+  const successTemplate = document.querySelector('#success').content.querySelector('.success');
+  const successMessage = successTemplate.cloneNode(true);
+  successMessage.style.zIndex = 1000;
+  document.querySelector('main').append(successMessage);
+  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('click', closePopup);
+};
+
+const showErrorMessage = () => {
+  const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+  const errorMessage = errorTemplate.cloneNode(true);
+  errorMessage.style.zIndex = 1000;
+  document.querySelector('main').append(errorMessage);
+  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('click', closePopup);
+};
+
+const onSubmitAdForm = (onSuccess, onFail) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(),
+      () => onFail(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+onSubmitAdForm(showSuccessMessage, showErrorMessage);
 
 export { disableAdForm, disableFilterForm, addressInput };
