@@ -1,6 +1,6 @@
 /* global L:readonly */
 import { addressInput } from './form.js';
-import { getAddress } from './util.js';
+import { getAddress, showErrorMessage } from './util.js';
 import { createCard } from './card.js';
 import { getData } from './data.js';
 
@@ -66,6 +66,8 @@ const renderOffers = (offers) => {
   });
 }
 
-getData((offers) => {
-  renderOffers(offers.slice(0, OFFERS_COUNT));
-});
+getData(
+  (offers) => {
+    renderOffers(offers.slice(0, OFFERS_COUNT));
+  },
+  showErrorMessage);
