@@ -13,15 +13,21 @@ const roomsCapacity = {
 const adForm = document.querySelector('.ad-form');
 const adFormFieldsets = adForm.querySelectorAll('fieldset');
 const typeSelect = adForm.querySelector('#type');
-const priceInput = adForm.querySelector('#price');
+const roomSelect = adForm.querySelector('#room_number');
 const timeInSelect = adForm.querySelector('#timein');
 const timeOutSelect = adForm.querySelector('#timeout');
-const addressInput = adForm.querySelector('#address');
 const capacitySelect = adForm.querySelector('#capacity');
-const resetButton = adForm.querySelector('.ad-form__reset');
 const capacityOptions = capacitySelect.querySelectorAll('option');
-const roomSelect = adForm.querySelector('#room_number');
+const priceInput = adForm.querySelector('#price');
+const addressInput = adForm.querySelector('#address');
+const resetButton = adForm.querySelector('.ad-form__reset');
 const filterForm = document.querySelector('.map__filters');
+
+const setAddresInputValue = (value) => {
+  addressInput.value = value;
+};
+
+addressInput.readOnly = true;
 
 typeSelect.addEventListener('change', () => {
   priceInput.min = TYPES[typeSelect.value].minPrice;
@@ -45,12 +51,10 @@ const disableAdForm = () => {
 
 const disableFilterForm = () => {
   filterForm.classList.add('map__filters--disabled');
-  for (let i = 0; i < filterForm.children.length; i++) {
-    filterForm.children[i].disabled = !filterForm.children[i].disabled;
+  for (let filterFormItem of filterForm.children) {
+    filterFormItem.disabled = !filterFormItem.disabled;
   }
 };
-
-addressInput.readOnly = true;
 
 const validateRoomSelect = () => {
   capacityOptions.forEach((option) => {
@@ -62,12 +66,15 @@ const validateRoomSelect = () => {
 
 validateRoomSelect();
 
-roomSelect.addEventListener('change', validateRoomSelect);
+const onRoomSelectChange = () => {
+  validateRoomSelect();
+};
+
+roomSelect.addEventListener('change', onRoomSelectChange);
 
 const onSubmitAdForm = (onSuccess, onFail) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
     sendData(
       () => onSuccess(),
       () => onFail(),
@@ -83,8 +90,6 @@ const resetAdForm = () => {
 
 resetAdForm();
 
-onResetButtonClick
-
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   resetAdForm();
@@ -95,4 +100,4 @@ onSubmitAdForm(() => {
   resetAdForm();
 }, showErrorMessage);
 
-export { disableAdForm, disableFilterForm, addressInput };
+export { disableAdForm, disableFilterForm, setAddresInputValue };

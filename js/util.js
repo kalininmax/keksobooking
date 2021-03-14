@@ -12,7 +12,7 @@ const createOfferPhotos = (photos) => {
     offerPhotosFragment.appendChild(offerPhoto);
   });
   return offerPhotosFragment;
-}
+};  
 
 const createOfferFeatures = (features) => {
   const featuresItemsFragment = document.createDocumentFragment();
@@ -23,11 +23,11 @@ const createOfferFeatures = (features) => {
     featuresItemsFragment.appendChild(featureItem);
   });
   return featuresItemsFragment;
-}
+};
 
 const getAddress = ({ lat, lng }) => {
   return `${lat.toFixed(5)}, ${lng.toFixed(5)}`
-}
+};
 
 const isEscEvent = (evt) => {
   return evt.key === 'Escape' || evt.key === 'Esc';
@@ -41,14 +41,19 @@ const closePopup = () => {
     document.querySelector('.error').remove();
   }
   document.removeEventListener('keydown', onPopupEscKeydown);
-}
+  document.removeEventListener('keydown', onPopupClick);
+};
 
 const onPopupEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     closePopup();
   }
-}
+};
+
+const onPopupClick = () => {
+  closePopup();
+};
 
 const showSuccessMessage = () => {
   const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -56,14 +61,14 @@ const showSuccessMessage = () => {
   successMessage.style.zIndex = 1000;
   document.querySelector('main').append(successMessage);
   document.addEventListener('keydown', onPopupEscKeydown);
-  document.addEventListener('click', closePopup);
+  document.addEventListener('click', onPopupClick);
 };
 
 const showErrorMessage = (message) => {
   const errorTemplate = document.querySelector('#error').content.querySelector('.error');
   const errorMessage = errorTemplate.cloneNode(true);
   errorMessage.style.zIndex = 1000;
-  if(message) {
+  if (message) {
     errorMessage.querySelector('p').textContent = message;
   }
   document.querySelector('main').append(errorMessage);
@@ -77,4 +82,4 @@ export {
   getAddress,
   showSuccessMessage,
   showErrorMessage
-}
+};

@@ -1,5 +1,5 @@
 /* global L:readonly */
-import { addressInput } from './form.js';
+import { setAddresInputValue } from './form.js';
 import { getAddress, showErrorMessage } from './util.js';
 import { createCard } from './card.js';
 import { getData } from './data.js';
@@ -47,28 +47,27 @@ const marker = L.marker(
 
 
 marker.on('moveend', (evt) => {
-  addressInput.value = getAddress(evt.target.getLatLng());
+  setAddresInputValue(getAddress(evt.target.getLatLng()));
 });
 
 const resetAddress = () => {
   marker.setLatLng(TOKYO);
-  addressInput.value = getAddress(marker.getLatLng());
-}
+  setAddresInputValue(getAddress(marker.getLatLng()));
+};
 
 const renderOffers = (offers) => {
   offers.forEach(offer => {
-    L.marker(
-      {
-        lat: offer.location.lat,
-        lng: offer.location.lng,
-      },
-      {
-        icon: pinIcon,
-      },
-    ).addTo(map)
+    const offerMarker = L.marker({
+      lat: offer.location.lat,
+      lng: offer.location.lng,
+    },
+    {
+      icon: pinIcon,
+    });
+    offerMarker.addTo(map)
       .bindPopup(createCard(offer));
   });
-}
+};
 
 getData(
   (offers) => {
