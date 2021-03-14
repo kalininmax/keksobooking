@@ -39,18 +39,18 @@ timeOutSelect.addEventListener('change', () => {
 const disableAdForm = () => {
   adForm.classList.add('ad-form--disabled');
   adFormFieldsets.forEach(fieldset => {
-    fieldset.setAttribute('disabled', 'disabled');
+    fieldset.disabled = !fieldset.disabled;
   });
 };
 
 const disableFilterForm = () => {
   filterForm.classList.add('map__filters--disabled');
   for (let i = 0; i < filterForm.children.length; i++) {
-    filterForm.children[i].setAttribute('disabled', 'disabled');
+    filterForm.children[i].disabled = !filterForm.children[i].disabled;
   }
 };
 
-addressInput.setAttribute('readonly', 'readonly');
+addressInput.readOnly = true;
 
 const validateRoomSelect = () => {
   capacityOptions.forEach((option) => {
@@ -82,6 +82,8 @@ const resetAdForm = () => {
 };
 
 resetAdForm();
+
+onResetButtonClick
 
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
