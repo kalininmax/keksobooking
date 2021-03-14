@@ -1,46 +1,17 @@
 const OFFER_PHOTO = { width: 45, height: 40 };
 
-const getRandomNumber = (min, max, afterComma = 0) => {
-  if (min < 0 || max < 0) {
-    return -1;
-  }
-  if (min > max) {
-    [min, max] = [max, min];
-  }
-  if (afterComma === 0) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  return Number.parseFloat((Math.random() * (max - min) + min).toFixed(afterComma));
-}
-
-const shuffleArray = (arr) => {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-const getRandomArrayElement = (arr) => {
-  return arr[getRandomNumber(0, arr.length - 1)];
-}
-
-const getRandomArrayElements = (arr) => {
-  return shuffleArray(arr).slice(0, getRandomNumber(1, arr.length));
-}
-
 const createOfferPhotos = (photos) => {
-  const photosListFragment = document.createDocumentFragment();
+  const offerPhotosFragment = document.createDocumentFragment();
   photos.forEach((photo) => {
-    const cardPhoto = document.createElement('img');
-    cardPhoto.classList.add('popup__photo');
-    cardPhoto.src = photo;
-    cardPhoto.width = OFFER_PHOTO.width;
-    cardPhoto.height = OFFER_PHOTO.height;
-    cardPhoto.alt = 'Фотография жилья';
-    photosListFragment.appendChild(cardPhoto);
+    const offerPhoto = document.createElement('img');
+    offerPhoto.classList.add('popup__photo');
+    offerPhoto.src = photo;
+    offerPhoto.width = OFFER_PHOTO.width;
+    offerPhoto.height = OFFER_PHOTO.height;
+    offerPhoto.alt = 'Фотография жилья';
+    offerPhotosFragment.appendChild(offerPhoto);
   });
-  return photosListFragment;
+  return offerPhotosFragment;
 }
 
 const createOfferFeatures = (features) => {
@@ -101,9 +72,6 @@ const showErrorMessage = (message) => {
 };
 
 export {
-  getRandomNumber,
-  getRandomArrayElement,
-  getRandomArrayElements,
   createOfferPhotos,
   createOfferFeatures,
   getAddress,
