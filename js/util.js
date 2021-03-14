@@ -29,10 +29,6 @@ const getRandomArrayElements = (arr) => {
   return shuffleArray(arr).slice(0, getRandomNumber(1, arr.length));
 }
 
-const getRandomLocation = ({ x, y }) => {
-  return { x: getRandomNumber(x.min, x.max, 5), y: getRandomNumber(y.min, y.max, 5) };
-}
-
 const createOfferPhotos = (photos) => {
   const photosListFragment = document.createDocumentFragment();
   photos.forEach((photo) => {
@@ -108,7 +104,6 @@ export {
   getRandomNumber,
   getRandomArrayElement,
   getRandomArrayElements,
-  getRandomLocation,
   createOfferPhotos,
   createOfferFeatures,
   getAddress,
