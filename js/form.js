@@ -1,4 +1,7 @@
-import { TYPES } from './data.js';
+import { TYPES } from './card.js';
+import { sendData } from './data.js';
+import { showSuccessMessage, showErrorMessage } from './util.js';
+import { resetAddress } from './map.js';
 
 const roomsCapacity = {
   1: ['1'],
@@ -6,17 +9,25 @@ const roomsCapacity = {
   3: ['1', '2', '3'],
   100: ['0'],
 };
+
 const adForm = document.querySelector('.ad-form');
 const adFormFieldsets = adForm.querySelectorAll('fieldset');
 const typeSelect = adForm.querySelector('#type');
-const priceInput = adForm.querySelector('#price');
+const roomSelect = adForm.querySelector('#room_number');
 const timeInSelect = adForm.querySelector('#timein');
 const timeOutSelect = adForm.querySelector('#timeout');
-const addressInput = adForm.querySelector('#address');
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.querySelectorAll('option');
-const roomSelect = adForm.querySelector('#room_number');
+const priceInput = adForm.querySelector('#price');
+const addressInput = adForm.querySelector('#address');
+const resetButton = adForm.querySelector('.ad-form__reset');
 const filterForm = document.querySelector('.map__filters');
+
+const setAddresInputValue = (value) => {
+  addressInput.value = value;
+};
+
+addressInput.readOnly = true;
 
 typeSelect.addEventListener('change', () => {
   priceInput.min = TYPES[typeSelect.value].minPrice;
@@ -34,23 +45,20 @@ timeOutSelect.addEventListener('change', () => {
 const disableAdForm = () => {
   adForm.classList.add('ad-form--disabled');
   adFormFieldsets.forEach(fieldset => {
-    fieldset.setAttribute('disabled', 'disabled');
+    fieldset.disabled = !fieldset.disabled;
   });
 };
 
 const disableFilterForm = () => {
   filterForm.classList.add('map__filters--disabled');
-  for (let i = 0; i < filterForm.children.length; i++) {
-    filterForm.children[i].setAttribute('disabled', 'disabled');
+  for (let filterFormItem of filterForm.children) {
+    filterFormItem.disabled = !filterFormItem.disabled;
   }
 };
 
-addressInput.setAttribute('readonly', 'readonly');
-
 const validateRoomSelect = () => {
   capacityOptions.forEach((option) => {
-    option.selected = roomsCapacity[roomSelect.value][0] === option.value; // выбирает первую доступную опцию
-    // indexOf ищет в массиве опцию, если такой опции нет — возвращает -1, сравнивает с 0, возвращает true
+    option.selected = roomsCapacity[roomSelect.value][0] === option.value;
     option.disabled = roomsCapacity[roomSelect.value].indexOf(option.value) < 0;
     option.hidden = option.disabled;
   });
@@ -58,6 +66,38 @@ const validateRoomSelect = () => {
 
 validateRoomSelect();
 
-roomSelect.addEventListener('change', validateRoomSelect);
+const onRoomSelectChange = () => {
+  validateRoomSelect();
+};
 
-export { disableAdForm, disableFilterForm, addressInput };
+roomSelect.addEventListener('change', onRoomSelectChange);
+
+const onSubmitAdForm = (onSuccess, onFail) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      () => onSuccess(),
+      () => onFail(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+const resetAdForm = () => {
+  adForm.reset();
+  resetAddress();
+};
+
+resetAdForm();
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetAdForm();
+})
+
+onSubmitAdForm(() => {
+  showSuccessMessage();
+  resetAdForm();
+}, showErrorMessage);
+
+export { disableAdForm, disableFilterForm, setAddresInputValue };

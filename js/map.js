@@ -1,8 +1,11 @@
 /* global L:readonly */
-import { TOKYO, offerList } from './data.js';
-import { addressInput } from './form.js';
-import { getAddress } from './util.js';
+import { setAddresInputValue } from './form.js';
+import { getAddress, showErrorMessage } from './util.js';
 import { createCard } from './card.js';
+import { getData } from './data.js';
+
+const TOKYO = { lat: 35.652832, lng: 139.839478 };
+const OFFERS_COUNT = 10;
 
 const map = L.map('map-canvas')
   .setView({
@@ -42,21 +45,34 @@ const marker = L.marker(
   },
 ).addTo(map);
 
-addressInput.value = getAddress(marker.getLatLng());
 
 marker.on('moveend', (evt) => {
-  addressInput.value = getAddress(evt.target.getLatLng());
+  setAddresInputValue(getAddress(evt.target.getLatLng()));
 });
 
-offerList.forEach(offer => {
-  L.marker(
-    {
-      lat: offer.location.x,
-      lng: offer.location.y,
+const resetAddress = () => {
+  marker.setLatLng(TOKYO);
+  setAddresInputValue(getAddress(marker.getLatLng()));
+};
+
+const renderOffers = (offers) => {
+  offers.forEach(offer => {
+    const offerMarker = L.marker({
+      lat: offer.location.lat,
+      lng: offer.location.lng,
     },
     {
       icon: pinIcon,
-    },
-  ).addTo(map)
-    .bindPopup(createCard(offer));
-});
+    });
+    offerMarker.addTo(map)
+      .bindPopup(createCard(offer));
+  });
+};
+
+getData(
+  (offers) => {
+    renderOffers(offers.slice(0, OFFERS_COUNT));
+  },
+  showErrorMessage);
+
+export { resetAddress };
