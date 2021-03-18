@@ -52,7 +52,7 @@ const filterOffers = (data) => {
       offers.push(data[i]);
     }
   }
-  return result;
+  return offers;
 };
 
 export { filterOffers };
