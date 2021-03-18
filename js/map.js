@@ -1,6 +1,6 @@
 /* global L:readonly */
 import { setAddresInputValue } from './form.js';
-import { getAddress, showErrorMessage } from './util.js';
+import { getAddress, showErrorMessage, debounce } from './util.js';
 import { createCard } from './card.js';
 import { getData } from './data.js';
 import { filterOffers } from './filter.js';
@@ -8,6 +8,7 @@ import { filterOffers } from './filter.js';
 const TOKYO = { lat: 35.652832, lng: 139.839478 };
 const MAP_ZOOM = 12;
 const MAX_OFFERS = 10;
+const RENDER_DELAY = 500;
 const filterForm = document.querySelector('.map__filters');
 
 let offers;
@@ -79,10 +80,10 @@ const removeMapPin = () => {
   layerGroup.clearLayers();
 }
 
-const onFilterChange = () => {
+const onFilterChange = debounce(() => {
   removeMapPin();
-  renderOffers(filterOffers(offers));
-};
+  renderOffers(filterOffers(offers))
+}, RENDER_DELAY);
 
 const onSuccess = (data) => {
   offers = data.slice(0, MAX_OFFERS);
