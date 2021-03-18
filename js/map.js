@@ -80,10 +80,8 @@ const removeMapPin = () => {
 }
 
 const onFilterChange = () => {
-  removeMapPin
+  removeMapPin();
   renderOffers(filterOffers(offers));
-  console.log('some filter changed!');
-
 };
 
 const onSuccess = (data) => {
