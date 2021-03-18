@@ -43,14 +43,14 @@ timeOutSelect.addEventListener('change', () => {
 });
 
 const disableAdForm = () => {
-  adForm.classList.add('ad-form--disabled');
+  adForm.classList.toggle('ad-form--disabled');
   adFormFieldsets.forEach(fieldset => {
     fieldset.disabled = !fieldset.disabled;
   });
 };
 
 const disableFilterForm = () => {
-  filterForm.classList.add('map__filters--disabled');
+  filterForm.classList.toggle('map__filters--disabled');
   for (let filterFormItem of filterForm.children) {
     filterFormItem.disabled = !filterFormItem.disabled;
   }
