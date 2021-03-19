@@ -76,15 +76,18 @@ const showErrorMessage = (message) => {
   document.addEventListener('click', closePopup);
 };
 
-const debounce = (f, ms) => {
-  let isCooldown = false;
+const debounce = function (cb, interval) {
+  let lastTimeout = null;
   return () => {
-    if (isCooldown) return;
-    f();
-    isCooldown = true;
-    setTimeout(() => isCooldown = false, ms);
+    const parameters = arguments;
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(() => {
+      cb.apply(null, parameters);
+    }, interval);
   };
-}
+};
 
 export {
   createOfferPhotos,
