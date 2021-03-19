@@ -86,8 +86,8 @@ const onFilterChange = debounce(() => {
 }, RENDER_DELAY);
 
 const onSuccess = (data) => {
-  offers = data.slice(0, MAX_OFFERS);
-  renderOffers(offers);
+  offers = data.slice();
+  renderOffers(offers.slice(0, MAX_OFFERS));
   filterForm.addEventListener('change', onFilterChange);
 };
 
