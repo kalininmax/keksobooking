@@ -12,7 +12,7 @@ const createOfferPhotos = (photos) => {
     offerPhotosFragment.appendChild(offerPhoto);
   });
   return offerPhotosFragment;
-};  
+};
 
 const createOfferFeatures = (features) => {
   const featuresItemsFragment = document.createDocumentFragment();
@@ -76,10 +76,24 @@ const showErrorMessage = (message) => {
   document.addEventListener('click', closePopup);
 };
 
+const debounce = function (cb, interval) {
+  let lastTimeout = null;
+  return () => {
+    const parameters = arguments;
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(() => {
+      cb.apply(null, parameters);
+    }, interval);
+  };
+};
+
 export {
   createOfferPhotos,
   createOfferFeatures,
   getAddress,
   showSuccessMessage,
-  showErrorMessage
+  showErrorMessage,
+  debounce
 };

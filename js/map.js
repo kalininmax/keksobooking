@@ -1,17 +1,23 @@
 /* global L:readonly */
 import { setAddresInputValue } from './form.js';
-import { getAddress, showErrorMessage } from './util.js';
+import { getAddress, showErrorMessage, debounce } from './util.js';
 import { createCard } from './card.js';
 import { getData } from './data.js';
+import { filterOffers } from './filter.js';
 
 const TOKYO = { lat: 35.652832, lng: 139.839478 };
-const OFFERS_COUNT = 10;
+const MAP_ZOOM = 12;
+const MAX_OFFERS = 10;
+const RENDER_DELAY = 500;
+const filterForm = document.querySelector('.map__filters');
+
+let offers;
 
 const map = L.map('map-canvas')
   .setView({
     lat: TOKYO.lat,
     lng: TOKYO.lng,
-  }, 12);
+  }, MAP_ZOOM);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -55,24 +61,40 @@ const resetAddress = () => {
   setAddresInputValue(getAddress(marker.getLatLng()));
 };
 
+const layerGroup = L.layerGroup().addTo(map);
+
 const renderOffers = (offers) => {
   offers.forEach(offer => {
-    const offerMarker = L.marker({
+    L.marker({
       lat: offer.location.lat,
       lng: offer.location.lng,
     },
     {
       icon: pinIcon,
-    });
-    offerMarker.addTo(map)
+    }).addTo(layerGroup)
       .bindPopup(createCard(offer));
   });
 };
 
-getData(
-  (offers) => {
-    renderOffers(offers.slice(0, OFFERS_COUNT));
-  },
-  showErrorMessage);
+const removeMapPin = () => {
+  layerGroup.clearLayers();
+}
 
-export { resetAddress };
+const onFilterChange = debounce(() => {
+  removeMapPin();
+  renderOffers(filterOffers(offers))
+}, RENDER_DELAY);
+
+const onSuccess = (data) => {
+  offers = data.slice();
+  renderOffers(offers.slice(0, MAX_OFFERS));
+  filterForm.addEventListener('change', onFilterChange);
+};
+
+const onFail = () => {
+  showErrorMessage();
+};
+
+getData(onSuccess, onFail);
+
+export { resetAddress, MAX_OFFERS };
