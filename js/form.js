@@ -56,6 +56,9 @@ const disableFilterForm = () => {
   }
 };
 
+disableAdForm();
+disableFilterForm();
+
 const validateRoomSelect = () => {
   capacityOptions.forEach((option) => {
     option.selected = roomsCapacity[roomSelect.value][0] === option.value;
