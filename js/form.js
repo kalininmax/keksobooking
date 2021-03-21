@@ -90,8 +90,9 @@ const resetForm = () => {
   adForm.reset();
   filterForm.reset();
   resetAddress();
-  renderOffers(offers);
 };
+
+resetForm();
 
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();

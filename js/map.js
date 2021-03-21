@@ -89,6 +89,7 @@ const onSuccess = (data) => {
   offers = data.slice();
   renderOffers(offers.slice(0, MAX_OFFERS));
   filterForm.addEventListener('change', onFilterChange);
+  filterForm.addEventListener('reset', onFilterChange);
   disableFilterForm();
   disableAdForm();
 };
