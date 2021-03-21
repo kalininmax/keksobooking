@@ -1,5 +1,5 @@
 /* global L:readonly */
-import { setAddresInputValue } from './form.js';
+import { setAddresInputValue, disableAdForm, disableFilterForm } from './form.js';
 import { getAddress, showErrorMessage, debounce } from './util.js';
 import { createCard } from './card.js';
 import { getData } from './data.js';
@@ -89,6 +89,8 @@ const onSuccess = (data) => {
   offers = data.slice();
   renderOffers(offers.slice(0, MAX_OFFERS));
   filterForm.addEventListener('change', onFilterChange);
+  disableFilterForm();
+  disableAdForm();
 };
 
 const onFail = () => {
@@ -97,4 +99,4 @@ const onFail = () => {
 
 getData(onSuccess, onFail);
 
-export { resetAddress, MAX_OFFERS };
+export { resetAddress, renderOffers, MAX_OFFERS, offers };

@@ -6,8 +6,8 @@ const Urls = {
 const getData = (onSuccess, onFail) => {
   fetch(Urls.GET)
     .then((response) => response.json())
-    .then((offers) => {
-      onSuccess(offers);
+    .then((data) => {
+      onSuccess(data);
     })
     .catch(() => {
       onFail('При загрузке данных с сервера произошла ошибка');

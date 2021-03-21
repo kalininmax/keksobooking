@@ -1,7 +1,7 @@
 import { TYPES } from './card.js';
 import { sendData } from './data.js';
 import { showSuccessMessage, showErrorMessage } from './util.js';
-import { resetAddress } from './map.js';
+import { resetAddress, renderOffers, offers } from './map.js';
 
 const roomsCapacity = {
   1: ['1'],
@@ -56,6 +56,9 @@ const disableFilterForm = () => {
   }
 };
 
+disableAdForm();
+disableFilterForm();
+
 const validateRoomSelect = () => {
   capacityOptions.forEach((option) => {
     option.selected = roomsCapacity[roomSelect.value][0] === option.value;
@@ -83,21 +86,21 @@ const onSubmitAdForm = (onSuccess, onFail) => {
   });
 };
 
-const resetAdForm = () => {
+const resetForm = () => {
   adForm.reset();
+  filterForm.reset();
   resetAddress();
+  renderOffers(offers);
 };
-
-resetAdForm();
 
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
-  resetAdForm();
+  resetForm();
 })
 
 onSubmitAdForm(() => {
   showSuccessMessage();
-  resetAdForm();
+  resetForm();
 }, showErrorMessage);
 
 export { disableAdForm, disableFilterForm, setAddresInputValue };

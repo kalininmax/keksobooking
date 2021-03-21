@@ -1,6 +1,11 @@
 import { createOfferPhotos, createOfferFeatures } from './util.js';
 
-const TYPES = { flat: { ru: 'Квартира', minPrice: 1000 }, bungalow: { ru: 'Бунгало', minPrice: 0 }, house: { ru: 'Дом', minPrice: 5000 }, palace: { ru: 'Дворец', minPrice: 10000 } }
+const TYPES = {
+  flat: { ru: 'Квартира', minPrice: 1000 },
+  bungalow: { ru: 'Бунгало', minPrice: 0 },
+  house: { ru: 'Дом', minPrice: 5000 },
+  palace: { ru: 'Дворец', minPrice: 10000 },
+};
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
