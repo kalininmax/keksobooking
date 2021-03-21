@@ -1,7 +1,7 @@
 import { TYPES } from './card.js';
 import { sendData } from './data.js';
 import { showSuccessMessage, showErrorMessage } from './util.js';
-import { resetAddress, renderOffers, offers } from './map.js';
+import { resetAddress } from './map.js';
 
 const roomsCapacity = {
   1: ['1'],

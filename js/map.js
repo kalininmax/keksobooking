@@ -104,4 +104,4 @@ const onFail = () => {
 
 getData(onSuccess, onFail);
 
-export { resetAddress, renderOffers, MAX_OFFERS, offers };
+export { resetAddress, MAX_OFFERS };
