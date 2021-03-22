@@ -85,10 +85,15 @@ const onFilterChange = debounce(() => {
   renderOffers(filterOffers(offers))
 }, RENDER_DELAY);
 
+const onFilterReset = () => {
+  onFilterChange();
+};
+
 const onSuccess = (data) => {
   offers = data.slice();
   renderOffers(offers.slice(0, MAX_OFFERS));
   filterForm.addEventListener('change', onFilterChange);
+  filterForm.addEventListener('reset', onFilterReset);
   disableFilterForm();
   disableAdForm();
 };
@@ -99,4 +104,4 @@ const onFail = () => {
 
 getData(onSuccess, onFail);
 
-export { resetAddress, renderOffers, MAX_OFFERS, offers };
+export { resetAddress, MAX_OFFERS };
