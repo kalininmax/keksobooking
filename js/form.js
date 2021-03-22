@@ -22,6 +22,8 @@ const priceInput = adForm.querySelector('#price');
 const addressInput = adForm.querySelector('#address');
 const resetButton = adForm.querySelector('.ad-form__reset');
 const filterForm = document.querySelector('.map__filters');
+const avatarPreview = document.querySelector('.ad-form-header__preview img');
+const photoPreview = document.querySelector('.ad-form__photo');
 
 const setAddresInputValue = (value) => {
   addressInput.value = value;
@@ -88,7 +90,9 @@ const onSubmitAdForm = (onSuccess, onFail) => {
 
 const resetForm = () => {
   adForm.reset();
+  avatarPreview.src = 'img/muffin-grey.svg';
   filterForm.reset();
+  photoPreview.style.background = '';
   resetAddress();
 };
 
