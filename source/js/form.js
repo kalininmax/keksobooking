@@ -3,6 +3,7 @@ import { sendData } from './data.js';
 import { showSuccessMessage, showErrorMessage } from './util.js';
 import { resetAddress } from './map.js';
 
+const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 const roomsCapacity = {
   1: ['1'],
   2: ['1', '2'],
@@ -90,7 +91,7 @@ const onSubmitAdForm = (onSuccess, onFail) => {
 
 const resetForm = () => {
   adForm.reset();
-  avatarPreview.src = 'img/muffin-grey.svg';
+  avatarPreview.src = DEFAULT_AVATAR;
   filterForm.reset();
   photoPreview.style.background = '';
   resetAddress();
