@@ -91,6 +91,8 @@ const onSubmitAdForm = (onSuccess, onFail) => {
 
 const resetForm = () => {
   adForm.reset();
+  priceInput.min = TYPES[typeSelect.value].minPrice;
+  priceInput.placeholder = TYPES[typeSelect.value].minPrice;
   avatarPreview.src = DEFAULT_AVATAR;
   filterForm.reset();
   photoPreview.style.background = '';
