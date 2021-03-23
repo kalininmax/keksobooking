@@ -1,9 +1,9 @@
-/* global L:readonly */
 import { setAddresInputValue, disableAdForm, disableFilterForm } from './form.js';
 import { getAddress, showErrorMessage, debounce } from './util.js';
 import { createCard } from './card.js';
 import { getData } from './data.js';
 import { filterOffers } from './filter.js';
+import L from 'leaflet';
 
 const TOKYO = { lat: 35.652832, lng: 139.839478 };
 const MAP_ZOOM = 12;
@@ -58,6 +58,7 @@ marker.on('moveend', (evt) => {
 
 const resetAddress = () => {
   marker.setLatLng(TOKYO);
+  map.setView(TOKYO);
   setAddresInputValue(getAddress(marker.getLatLng()));
 };
 
